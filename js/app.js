@@ -14,8 +14,11 @@
       Mousetrap.bind('up', this.previousImage);
       Mousetrap.bind('down', this.nextImage);
       $('a.to-credits').bind('click', this.toCredits);
-      this.initVideo();
+      SC.initialize({
+        client_id: "d47b942351e59deb9ec38d90a15beb81"
+      });
       SC.whenStreamingReady(this.initAudio);
+      this.initVideo();
     },
     loadImage: function(el) {
       var $el, $i, i, src;
@@ -66,7 +69,7 @@
     initVideo: function() {
       var iframe, player,
         _this = this;
-      iframe = $('#vimeo')[0];
+      iframe = $('#vimeoplayer')[0];
       player = $f(iframe);
       player.addEvent('ready', function() {
         console.log('player ready');
@@ -78,7 +81,7 @@
     initAudio: function() {
       var _this = this;
       console.log('initAudio');
-      SC.stream("/tracks/5465310", function(sound) {
+      SC.stream("/tracks/36137744", function(sound) {
         _this.audio = sound;
         return _this.audio.play();
       });

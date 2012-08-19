@@ -6,18 +6,16 @@ App =
     _.bindAll @
     _.each $('.image'), @loadImage
     _.each $('.full-image'), @loadImage
-    # @scrollInt = setInterval @position, 44
-    # console.log $('html').scrollTop()
     $(window).bind 'scroll', @position
     Mousetrap.bind 'left', @previousImage
     Mousetrap.bind 'right', @nextImage
     Mousetrap.bind 'up', @previousImage
     Mousetrap.bind 'down', @nextImage
-    # $(window).bind 'keypress', @nextImage
     $('a.to-credits').bind 'click', @toCredits
-    @initVideo()
+    SC.initialize
+      client_id: "d47b942351e59deb9ec38d90a15beb81"
     SC.whenStreamingReady @initAudio
-    # @initAudio()
+    @initVideo()
     return
 
   loadImage: (el) ->
@@ -68,7 +66,7 @@ App =
     return
 
   initVideo: ->
-    iframe = $('#vimeo')[0]
+    iframe = $('#vimeoplayer')[0]
     player = $f(iframe)
     player.addEvent 'ready', () =>
       console.log 'player ready'
@@ -80,7 +78,7 @@ App =
 
   initAudio: ->
     console.log 'initAudio'
-    SC.stream "/tracks/5465310", (sound) =>
+    SC.stream "/tracks/36137744", (sound) =>
       @audio = sound
       @audio.play()
     return
