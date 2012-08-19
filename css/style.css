@@ -1,0 +1,277 @@
+/*
+YUI 3.4.1 (build 4118)
+Copyright 2011 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+http://yuilibrary.com/license/
+*/
+html {
+  color: #000;
+  background: #ffffff;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  border: 0;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+ol,
+ul {
+  list-style: none;
+}
+caption,
+th {
+  text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+q:before,
+q:after {
+  content: '';
+}
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+sup {
+  vertical-align: text-top;
+}
+sub {
+  vertical-align: text-bottom;
+}
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+input,
+textarea,
+select {
+  *font-size: 100%;
+}
+legend {
+  color: #000000;
+}
+.full-image,
+.empty,
+.image,
+.text,
+.video,
+.credits {
+  height: 1000px;
+  position: relative;
+  overflow: visible;
+}
+.full-image .embed,
+.image .embed,
+.video .embed,
+.full-image img,
+.image img,
+.video img {
+  position: absolute;
+  z-index: 10;
+}
+.text {
+  font: 400 13px/17px 'Helvetica Neue', Sans-Serif;
+  text-align: center;
+  color: #BBB;
+}
+.text img {
+  position: relative;
+}
+.text .inner {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  right: 0px;
+  margin-top: -200px;
+}
+.text a.logo {
+  display: block;
+  margin-top: 40px;
+  text-decoration: none;
+  color: #BBB;
+}
+.image img {
+  width: 400px;
+  left: 100px;
+  top: 100px;
+}
+.full-image img {
+  width: 1000px;
+  left: 100px;
+  top: 60px;
+}
+.video .embed {
+  position: absolute;
+  width: 1000px;
+  height: 600px;
+  top: 80px;
+  left: 100px;
+}
+.arrow-keys {
+  position: relative;
+  left: 50%;
+  margin-left: -75px;
+  height: 100px;
+  margin-bottom: 40px;
+  margin-top: 38px;
+}
+.arrow-keys .arrow {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #CCC;
+  position: absolute;
+  border-radius: 4px;
+  text-align: center;
+  font: 400 9px/40px sans-serif;
+  color: #EEE;
+}
+.arrow-keys .left {
+  left: 0px;
+  top: 50px;
+}
+.arrow-keys .up {
+  left: 50px;
+  top: 0px;
+}
+.arrow-keys .down {
+  left: 50px;
+  top: 50px;
+}
+.arrow-keys .right {
+  top: 50px;
+  left: 100px;
+}
+#left,
+#right {
+  font-size: 0px;
+  width: 600px;
+}
+#left {
+  position: absolute;
+  left: 50%;
+  top: 0px;
+  margin-left: -600px;
+}
+#right {
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  margin-top: -12000px;
+}
+#right .image img {
+  left: auto;
+  right: 100px;
+}
+#right .full-image img {
+  right: 100px;
+  left: auto;
+}
+footer {
+  z-index: 1;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  font: 400 12px/11px 'Helvetica Neue';
+  letter-spacing: 1px;
+  width: 600px;
+  margin-left: -300px;
+  color: #CCC;
+  text-align: center;
+  /*letter-spacing: 1px;*/
+
+}
+footer a {
+  text-decoration: none;
+  color: #AAA;
+}
+.credits {
+  font: 400 13px/22px 'Helvetica Neue', Sans-Serif;
+}
+.credits a {
+  color: #000;
+  text-decoration: underline;
+}
+.credits a:hover {
+  text-decoration: none;
+}
+.credits p.title {
+  position: absolute;
+  top: 200px;
+  text-align: right;
+  right: 120px;
+  font: 300 18px/22px 'Helvetica Neue';
+  color: #BBB;
+}
+.credits p.title a {
+  text-decoration: none;
+  color: #000;
+}
+.credits dl {
+  position: relative;
+  top: 200px;
+}
+.credits dl dt,
+.credits dl dd {
+  margin-bottom: 6px;
+}
+.credits dl dt {
+  display: inline-block;
+  width: 140px;
+  color: #BBB;
+}
+.credits dl dd {
+  display: inline-block;
+}
