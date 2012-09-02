@@ -103,6 +103,9 @@ select {
 legend {
   color: #000000;
 }
+html {
+  overflow-x: hidden;
+}
 .full-image,
 .empty,
 .image,
@@ -209,7 +212,7 @@ legend {
   position: fixed;
   top: 0px;
   left: 50%;
-  margin-top: -11000px;
+  margin-top: -13000px;
 }
 #right .image img {
   left: auto;

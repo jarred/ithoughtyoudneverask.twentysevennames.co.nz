@@ -11,6 +11,8 @@ App =
     Mousetrap.bind 'right', @nextImage
     Mousetrap.bind 'up', @previousImage
     Mousetrap.bind 'down', @nextImage
+    Mousetrap.bind 'j', @nextImage
+    Mousetrap.bind 'k', @previousImage
     $('a.to-credits').bind 'click', @toCredits
     SC.initialize
       client_id: "d47b942351e59deb9ec38d90a15beb81"
@@ -62,7 +64,7 @@ App =
 
   toCredits: (e) ->
     e.preventDefault()
-    @showImage(12)
+    @showImage(11)
     return
 
   initVideo: ->

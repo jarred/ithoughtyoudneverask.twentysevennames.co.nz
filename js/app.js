@@ -13,6 +13,8 @@
       Mousetrap.bind('right', this.nextImage);
       Mousetrap.bind('up', this.previousImage);
       Mousetrap.bind('down', this.nextImage);
+      Mousetrap.bind('j', this.nextImage);
+      Mousetrap.bind('k', this.previousImage);
       $('a.to-credits').bind('click', this.toCredits);
       SC.initialize({
         client_id: "d47b942351e59deb9ec38d90a15beb81"
@@ -64,7 +66,7 @@
     },
     toCredits: function(e) {
       e.preventDefault();
-      this.showImage(12);
+      this.showImage(11);
     },
     initVideo: function() {
       var iframe, player,
