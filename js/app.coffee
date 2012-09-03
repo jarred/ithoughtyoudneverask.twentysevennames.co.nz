@@ -63,12 +63,13 @@ App =
     @currentImage = n
 
     if n == 12
-      @player.api('play')
+      @player?.api('play')
+      @audio?.pause()
     return
 
   toCredits: (e) ->
     e.preventDefault()
-    @showImage(11)
+    @showImage(13)
     return
 
   initVideo: ->

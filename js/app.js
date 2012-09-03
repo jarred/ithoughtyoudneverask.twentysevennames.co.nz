@@ -53,6 +53,7 @@
       return false;
     },
     showImage: function(n) {
+      var _ref, _ref1;
       console.log('showImage', n);
       if (n < 0) {
         return;
@@ -65,12 +66,17 @@
       }, 420);
       this.currentImage = n;
       if (n === 12) {
-        this.player.api('play');
+        if ((_ref = this.player) != null) {
+          _ref.api('play');
+        }
+        if ((_ref1 = this.audio) != null) {
+          _ref1.pause();
+        }
       }
     },
     toCredits: function(e) {
       e.preventDefault();
-      this.showImage(11);
+      this.showImage(13);
     },
     initVideo: function() {
       var iframe,
