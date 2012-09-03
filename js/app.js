@@ -58,7 +58,7 @@
       if (n < 0) {
         return;
       }
-      if (n > 12) {
+      if (n > 13) {
         return;
       }
       $('body').animate({

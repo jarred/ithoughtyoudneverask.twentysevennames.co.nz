@@ -152,7 +152,8 @@ html {
   top: 100px;
 }
 .sketch img {
-  border: 1px solid #DDD;
+  /*border: 1px solid #DDD;*/
+
 }
 .full-image img {
   width: 1000px;

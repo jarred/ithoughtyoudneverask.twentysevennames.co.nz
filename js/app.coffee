@@ -56,7 +56,7 @@ App =
   showImage: (n) ->
     console.log 'showImage', n
     return if n < 0
-    return if n > 12
+    return if n > 13
     $('body').animate
       scrollTop: n * 1000
     , 420
