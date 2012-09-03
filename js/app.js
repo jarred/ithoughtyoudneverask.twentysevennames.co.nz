@@ -15,6 +15,7 @@
       Mousetrap.bind('down', this.nextImage);
       Mousetrap.bind('j', this.nextImage);
       Mousetrap.bind('k', this.previousImage);
+      $('a.sound').bind('click', this.toggleSound);
       $('a.to-credits').bind('click', this.toCredits);
       SC.initialize({
         client_id: "d47b942351e59deb9ec38d90a15beb81"
@@ -63,30 +64,58 @@
         scrollTop: n * 1000
       }, 420);
       this.currentImage = n;
+      if (n === 12) {
+        this.player.api('play');
+      }
     },
     toCredits: function(e) {
       e.preventDefault();
       this.showImage(11);
     },
     initVideo: function() {
-      var iframe, player,
+      var iframe,
         _this = this;
       iframe = $('#vimeoplayer')[0];
-      player = $f(iframe);
-      player.addEvent('ready', function() {
+      this.player = $f(iframe);
+      this.player.addEvent('ready', function() {
         console.log('player ready');
       });
-      player.addEvent('play', function() {
-        console.log('play?');
+      this.player.addEvent('play', function() {
+        console.log('player play');
+        console.log(_this.audio);
+        if (!_this.audio.paused) {
+          _this.pauseAudio();
+        }
       });
     },
     initAudio: function() {
       var _this = this;
       console.log('initAudio');
-      SC.stream("/tracks/36137744", function(sound) {
+      SC.stream("/tracks/54035078", function(sound) {
         _this.audio = sound;
         return _this.audio.play();
       });
+    },
+    pauseAudio: function() {
+      var $el;
+      this.audio.pause();
+      $el = $('a.sound');
+      $el.text('sound off');
+      $el.removeClass('off');
+    },
+    toggleSound: function(e) {
+      var $el;
+      e.preventDefault();
+      $el = $(e.target);
+      if ($el.hasClass('off')) {
+        $el.removeClass('off');
+        this.audio.play();
+        $el.text('sound off');
+      } else {
+        $el.addClass('off');
+        this.audio.pause();
+        $el.text('sound on');
+      }
     }
   };
 

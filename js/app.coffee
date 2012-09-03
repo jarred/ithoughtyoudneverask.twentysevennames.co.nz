@@ -13,6 +13,7 @@ App =
     Mousetrap.bind 'down', @nextImage
     Mousetrap.bind 'j', @nextImage
     Mousetrap.bind 'k', @previousImage
+    $('a.sound').bind 'click', @toggleSound
     $('a.to-credits').bind 'click', @toCredits
     SC.initialize
       client_id: "d47b942351e59deb9ec38d90a15beb81"
@@ -60,6 +61,9 @@ App =
       scrollTop: n * 1000
     , 420
     @currentImage = n
+
+    if n == 12
+      @player.api('play')
     return
 
   toCredits: (e) ->
@@ -69,20 +73,42 @@ App =
 
   initVideo: ->
     iframe = $('#vimeoplayer')[0]
-    player = $f(iframe)
-    player.addEvent 'ready', () =>
+    @player = $f(iframe)
+    @player.addEvent 'ready', () =>
       console.log 'player ready'
       return
-    player.addEvent 'play', () =>
-      console.log 'play?'
+    @player.addEvent 'play', () =>
+      console.log 'player play'
+      console.log @audio
+      @pauseAudio() if !@audio.paused
       return
     return
 
   initAudio: ->
     console.log 'initAudio'
-    SC.stream "/tracks/36137744", (sound) =>
+    SC.stream "/tracks/54035078", (sound) =>
       @audio = sound
       @audio.play()
+    return
+
+  pauseAudio: ->
+    @audio.pause()
+    $el = $('a.sound')
+    $el.text 'sound off'
+    $el.removeClass 'off'
+    return
+
+  toggleSound: (e) ->
+    e.preventDefault()
+    $el = $(e.target)
+    if $el.hasClass 'off'
+      $el.removeClass 'off'
+      @audio.play()
+      $el.text 'sound off'
+    else
+      $el.addClass 'off'
+      @audio.pause()
+      $el.text 'sound on'
     return
 
 App.init()
