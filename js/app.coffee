@@ -65,6 +65,7 @@ App =
     if n == 12
       @player?.api('play')
       @audio?.pause()
+      $('a.sound').addClass('off').text('sound on')
     return
 
   toCredits: (e) ->
@@ -80,8 +81,9 @@ App =
       return
     @player.addEvent 'play', () =>
       console.log 'player play'
-      console.log @audio
-      @pauseAudio() if !@audio.paused
+      @player?.api('play')
+      @audio?.pause()
+      $('a.sound').addClass('off').text('sound on')
       return
     return
 

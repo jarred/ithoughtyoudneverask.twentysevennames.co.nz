@@ -72,6 +72,7 @@
         if ((_ref1 = this.audio) != null) {
           _ref1.pause();
         }
+        $('a.sound').addClass('off').text('sound on');
       }
     },
     toCredits: function(e) {
@@ -87,11 +88,15 @@
         console.log('player ready');
       });
       this.player.addEvent('play', function() {
+        var _ref, _ref1;
         console.log('player play');
-        console.log(_this.audio);
-        if (!_this.audio.paused) {
-          _this.pauseAudio();
+        if ((_ref = _this.player) != null) {
+          _ref.api('play');
         }
+        if ((_ref1 = _this.audio) != null) {
+          _ref1.pause();
+        }
+        $('a.sound').addClass('off').text('sound on');
       });
     },
     initAudio: function() {
