@@ -151,6 +151,9 @@ html {
   left: 100px;
   top: 100px;
 }
+.sketch img {
+  border: 1px solid #CCC;
+}
 .full-image img {
   width: 1000px;
   left: 100px;
@@ -212,7 +215,7 @@ html {
   position: fixed;
   top: 0px;
   left: 50%;
-  margin-top: -13000px;
+  margin-top: -15000px;
 }
 #right .image img {
   left: auto;
