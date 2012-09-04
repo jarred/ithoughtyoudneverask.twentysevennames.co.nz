@@ -3,16 +3,34 @@ App =
   currentImage: 0
   
   init: ->
-    iOS = true
-    iOS = true if navigator.userAgent.match(/(iPad|iPhone|iPod)/i)
+    @iOS = false
+    @iOS = true if navigator.userAgent.match(/(iPad|iPhone|iPod)/i)
 
     _.bindAll @
     _.each $('.image'), @loadImage
     _.each $('.full-image'), @loadImage
-    if !iOS
-      setInterval @position, 30
+    if @iOS
+      $('body').addClass 'ios'
+      @hammer = new Hammer $('body')[0], 
+        drag: true
+        drag_vertical: true
+        drag_horizontal: false
+        drag_min_distance: 0
+        preventDefault: true
+        transform: false
+        tap: false
+        tap_double: false
+        hold: false
+      @hammer.ondragend = (ev) =>
+        @nextImage() if ev.direction == 'up'
+        @previousImage() if ev.direction == 'down'
+        return
+      @hammer.onswipe = (ev) =>
+        @nextImage() if ev.direction == 'up'
+        @previousImage() if ev.direction == 'down'
+        return
     else
-      $(window).bind 'scroll', @position
+      setInterval @position, 24
     Mousetrap.bind 'left', @previousImage
     Mousetrap.bind 'right', @nextImage
     Mousetrap.bind 'up', @previousImage
@@ -63,10 +81,18 @@ App =
       $el = $('html')
     else
       $el = $('body')
-
-    $el.animate
-      scrollTop: n * 1000
-    , 420
+    if @iOS
+      $('#left').animate
+        top: - n * 1000
+      , 420
+      $('#right').animate
+        top: n * 1000
+      , 420
+    else
+      $el.animate
+        scrollTop: n * 1000
+      , 420
+    
     @currentImage = n
 
     if n == 12
@@ -97,7 +123,7 @@ App =
     return
 
   pauseAudio: ->
-    @audio.pause()
+    @audio?.pause()
     $el = $('a.sound')
     $el.text 'sound off'
     $el.removeClass 'off'

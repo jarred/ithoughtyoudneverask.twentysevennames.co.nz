@@ -5,18 +5,45 @@
   App = {
     currentImage: 0,
     init: function() {
-      var iOS;
-      iOS = true;
+      var _this = this;
+      this.iOS = false;
       if (navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) {
-        iOS = true;
+        this.iOS = true;
       }
       _.bindAll(this);
       _.each($('.image'), this.loadImage);
       _.each($('.full-image'), this.loadImage);
-      if (!iOS) {
-        setInterval(this.position, 30);
+      if (this.iOS) {
+        $('body').addClass('ios');
+        this.hammer = new Hammer($('body')[0], {
+          drag: true,
+          drag_vertical: true,
+          drag_horizontal: false,
+          drag_min_distance: 0,
+          preventDefault: true,
+          transform: false,
+          tap: false,
+          tap_double: false,
+          hold: false
+        });
+        this.hammer.ondragend = function(ev) {
+          if (ev.direction === 'up') {
+            _this.nextImage();
+          }
+          if (ev.direction === 'down') {
+            _this.previousImage();
+          }
+        };
+        this.hammer.onswipe = function(ev) {
+          if (ev.direction === 'up') {
+            _this.nextImage();
+          }
+          if (ev.direction === 'down') {
+            _this.previousImage();
+          }
+        };
       } else {
-        $(window).bind('scroll', this.position);
+        setInterval(this.position, 24);
       }
       Mousetrap.bind('left', this.previousImage);
       Mousetrap.bind('right', this.nextImage);
@@ -76,9 +103,18 @@
       } else {
         $el = $('body');
       }
-      $el.animate({
-        scrollTop: n * 1000
-      }, 420);
+      if (this.iOS) {
+        $('#left').animate({
+          top: -n * 1000
+        }, 420);
+        $('#right').animate({
+          top: n * 1000
+        }, 420);
+      } else {
+        $el.animate({
+          scrollTop: n * 1000
+        }, 420);
+      }
       this.currentImage = n;
       if (n === 12) {
         if ((_ref = this.player) != null) {
@@ -117,8 +153,10 @@
       this.audio.play();
     },
     pauseAudio: function() {
-      var $el;
-      this.audio.pause();
+      var $el, _ref;
+      if ((_ref = this.audio) != null) {
+        _ref.pause();
+      }
       $el = $('a.sound');
       $el.text('sound off');
       $el.removeClass('off');

@@ -10,6 +10,14 @@ html{
   overflow-x: hidden;
 }
 
+body.ios{
+  overflow: hidden;
+}
+
+.hide{
+  display: none !important;
+}
+
 .full-image,
 .empty,
 .image,
@@ -76,6 +84,7 @@ html{
 .video{
   .embed{
     position: absolute;
+    z-index: 999;
     width: 1000px;
     height: 560px;
     top: 100px;
@@ -118,6 +127,19 @@ html{
   }
 }
 
+#ios-cover{
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: #ff3300;
+  z-index: 100;
+  opacity: 0.3;
+  font: 400 45px/80px Sans-Serif;
+  color: #000;
+}
+
 
 #left,
 #right{
@@ -130,6 +152,9 @@ html{
   left: 50%;
   top: 0px;
   margin-left: -600px;
+  body.ios &{
+    position: fixed;
+  }
 }
 
 #right{
@@ -153,7 +178,7 @@ html{
 }
 
 footer{
-  z-index: 1;
+  z-index: 999;
   position: fixed;
   bottom: 20px;
   left: 50%;

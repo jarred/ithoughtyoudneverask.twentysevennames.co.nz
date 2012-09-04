@@ -106,6 +106,12 @@ legend {
 html {
   overflow-x: hidden;
 }
+body.ios {
+  overflow: hidden;
+}
+.hide {
+  display: none !important;
+}
 .full-image,
 .empty,
 .image,
@@ -162,6 +168,7 @@ html {
 }
 .video .embed {
   position: absolute;
+  z-index: 999;
   width: 1000px;
   height: 560px;
   top: 100px;
@@ -201,6 +208,18 @@ html {
   top: 50px;
   left: 100px;
 }
+#ios-cover {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: #ff3300;
+  z-index: 100;
+  opacity: 0.3;
+  font: 400 45px/80px Sans-Serif;
+  color: #000;
+}
 #left,
 #right {
   font-size: 0px;
@@ -211,6 +230,9 @@ html {
   left: 50%;
   top: 0px;
   margin-left: -600px;
+}
+body.ios #left {
+  position: fixed;
 }
 #right {
   position: fixed;
@@ -227,7 +249,7 @@ html {
   left: auto;
 }
 footer {
-  z-index: 1;
+  z-index: 999;
   position: fixed;
   bottom: 20px;
   left: 50%;
