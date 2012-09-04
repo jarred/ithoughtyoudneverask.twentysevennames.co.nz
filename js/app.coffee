@@ -15,10 +15,6 @@ App =
     Mousetrap.bind 'k', @previousImage
     $('a.sound').bind 'click', @toggleSound
     $('a.to-credits').bind 'click', @toCredits
-    console.log $.browser
-    # SC.initialize
-    #   client_id: "d47b942351e59deb9ec38d90a15beb81"
-    # SC.whenStreamingReady @initAudio
     @initAudio()
     @initVideo()
     return
@@ -29,13 +25,10 @@ App =
     i = new Image()
     i.src = src
     $i = $(i)
-    # $el.css
-      # 'backgroundImage': "url('#{src}')"
     $el.append i
     return
 
   position: (e) ->
-    # console.log 'position'
     if $.browser.mozilla
       $el = $('html')
     else
@@ -43,7 +36,6 @@ App =
     scrollTop = $el.scrollTop()
     h = $('#left').height()
     y = scrollTop
-    # @currentImage = Math.round((y/h)*13)
     if scrollTop >= h
       $el.scrollTop 0
     $('#right').css
@@ -51,17 +43,14 @@ App =
     return
 
   nextImage: () ->
-    # e?.preventDefault()
     @showImage @currentImage + 1
     return false
 
   previousImage: () ->
-    # e?.preventDefault()
     @showImage @currentImage - 1
     return false
 
   showImage: (n) ->
-    console.log 'showImage', n
     return if n < 0
     return if n > 13
     if $.browser.mozilla
@@ -88,8 +77,6 @@ App =
   initVideo: ->
     iframe = $('#vimeoplayer')[0]
     @player = $f(iframe)
-    # @player.addEvent 'ready', () =>
-    #   return
     @player.addEvent 'play', () =>
       @player?.api('play')
       @audio?.pause()

@@ -17,7 +17,6 @@
       Mousetrap.bind('k', this.previousImage);
       $('a.sound').bind('click', this.toggleSound);
       $('a.to-credits').bind('click', this.toCredits);
-      console.log($.browser);
       this.initAudio();
       this.initVideo();
     },
@@ -57,7 +56,6 @@
     },
     showImage: function(n) {
       var $el, _ref, _ref1;
-      console.log('showImage', n);
       if (n < 0) {
         return;
       }
