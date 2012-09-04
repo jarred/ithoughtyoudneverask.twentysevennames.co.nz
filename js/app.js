@@ -6,7 +6,7 @@
     currentImage: 0,
     init: function() {
       var iOS;
-      iOS = false;
+      iOS = true;
       if (navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) {
         iOS = true;
       }
@@ -14,9 +14,9 @@
       _.each($('.image'), this.loadImage);
       _.each($('.full-image'), this.loadImage);
       if (!iOS) {
-        $(window).bind('scroll', this.position);
-      } else {
         setInterval(this.position, 30);
+      } else {
+        $(window).bind('scroll', this.position);
       }
       Mousetrap.bind('left', this.previousImage);
       Mousetrap.bind('right', this.nextImage);

@@ -3,16 +3,16 @@ App =
   currentImage: 0
   
   init: ->
-    iOS = false
+    iOS = true
     iOS = true if navigator.userAgent.match(/(iPad|iPhone|iPod)/i)
 
     _.bindAll @
     _.each $('.image'), @loadImage
     _.each $('.full-image'), @loadImage
     if !iOS
-      $(window).bind 'scroll', @position
-    else
       setInterval @position, 30
+    else
+      $(window).bind 'scroll', @position
     Mousetrap.bind 'left', @previousImage
     Mousetrap.bind 'right', @nextImage
     Mousetrap.bind 'up', @previousImage
