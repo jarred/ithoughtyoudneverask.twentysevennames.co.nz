@@ -17,6 +17,7 @@
       Mousetrap.bind('k', this.previousImage);
       $('a.sound').bind('click', this.toggleSound);
       $('a.to-credits').bind('click', this.toCredits);
+      console.log($.browser);
       this.initAudio();
       this.initVideo();
     },
@@ -30,12 +31,17 @@
       $el.append(i);
     },
     position: function(e) {
-      var h, scrollTop, y;
-      scrollTop = $('body').scrollTop();
+      var $el, h, scrollTop, y;
+      if ($.browser.mozilla) {
+        $el = $('html');
+      } else {
+        $el = $('body');
+      }
+      scrollTop = $el.scrollTop();
       h = $('#left').height();
       y = scrollTop;
       if (scrollTop >= h) {
-        $('body').scrollTop(0);
+        $el.scrollTop(0);
       }
       $('#right').css({
         top: "" + y + "px"
@@ -50,14 +56,20 @@
       return false;
     },
     showImage: function(n) {
-      var _ref, _ref1;
+      var $el, _ref, _ref1;
+      console.log('showImage', n);
       if (n < 0) {
         return;
       }
       if (n > 13) {
         return;
       }
-      $('body').animate({
+      if ($.browser.mozilla) {
+        $el = $('html');
+      } else {
+        $el = $('body');
+      }
+      $el.animate({
         scrollTop: n * 1000
       }, 420);
       this.currentImage = n;

@@ -15,6 +15,7 @@ App =
     Mousetrap.bind 'k', @previousImage
     $('a.sound').bind 'click', @toggleSound
     $('a.to-credits').bind 'click', @toCredits
+    console.log $.browser
     # SC.initialize
     #   client_id: "d47b942351e59deb9ec38d90a15beb81"
     # SC.whenStreamingReady @initAudio
@@ -34,12 +35,17 @@ App =
     return
 
   position: (e) ->
-    scrollTop = $('body').scrollTop()
+    # console.log 'position'
+    if $.browser.mozilla
+      $el = $('html')
+    else
+      $el = $('body')
+    scrollTop = $el.scrollTop()
     h = $('#left').height()
     y = scrollTop
     # @currentImage = Math.round((y/h)*13)
     if scrollTop >= h
-      $('body').scrollTop 0
+      $el.scrollTop 0
     $('#right').css
       top: "#{y}px"
     return
@@ -55,9 +61,15 @@ App =
     return false
 
   showImage: (n) ->
+    console.log 'showImage', n
     return if n < 0
     return if n > 13
-    $('body').animate
+    if $.browser.mozilla
+      $el = $('html')
+    else
+      $el = $('body')
+
+    $el.animate
       scrollTop: n * 1000
     , 420
     @currentImage = n
