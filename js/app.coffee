@@ -3,10 +3,11 @@ App =
   currentImage: 0
   
   init: ->
+    _.bindAll @
+
     @iOS = false
     @iOS = true if navigator.userAgent.match(/(iPad|iPhone|iPod)/i)
 
-    _.bindAll @
     _.each $('.image'), @loadImage
     _.each $('.full-image'), @loadImage
     if @iOS
@@ -39,8 +40,9 @@ App =
     Mousetrap.bind 'k', @previousImage
     $('a.sound').bind 'click', @toggleSound
     $('a.to-credits').bind 'click', @toCredits
-    @initAudio()
-    @initVideo()
+    if !@iOS
+      @initAudio()
+      @initVideo()
     return
 
   loadImage: (el) ->
@@ -96,9 +98,9 @@ App =
     @currentImage = n
 
     if n == 12
-      @player?.api('play')
-      @audio?.pause()
-      $('a.sound').addClass('off').text('sound on')
+      @player.api('play') if !@iOS
+      @audio.pause() if !@iOS
+      $('a.sound').addClass('off').text('sound on') if !@iOS
     return
 
   toCredits: (e) ->
@@ -110,8 +112,8 @@ App =
     iframe = $('#vimeoplayer')[0]
     @player = $f(iframe)
     @player.addEvent 'play', () =>
-      @player?.api('play')
-      @audio?.pause()
+      @player.api('play')
+      @audio.pause()
       $('a.sound').addClass('off').text('sound on')
       return
     return
@@ -123,13 +125,15 @@ App =
     return
 
   pauseAudio: ->
-    @audio?.pause()
+    return if @iOS
+    @audio.pause()
     $el = $('a.sound')
     $el.text 'sound off'
     $el.removeClass 'off'
     return
 
   toggleSound: (e) ->
+    return if @iOS
     e.preventDefault()
     $el = $(e.target)
     if $el.hasClass 'off'

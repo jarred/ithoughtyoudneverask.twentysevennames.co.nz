@@ -6,11 +6,11 @@
     currentImage: 0,
     init: function() {
       var _this = this;
+      _.bindAll(this);
       this.iOS = false;
       if (navigator.userAgent.match(/(iPad|iPhone|iPod)/i)) {
         this.iOS = true;
       }
-      _.bindAll(this);
       _.each($('.image'), this.loadImage);
       _.each($('.full-image'), this.loadImage);
       if (this.iOS) {
@@ -53,8 +53,10 @@
       Mousetrap.bind('k', this.previousImage);
       $('a.sound').bind('click', this.toggleSound);
       $('a.to-credits').bind('click', this.toCredits);
-      this.initAudio();
-      this.initVideo();
+      if (!this.iOS) {
+        this.initAudio();
+        this.initVideo();
+      }
     },
     loadImage: function(el) {
       var $el, $i, i, src;
@@ -91,7 +93,7 @@
       return false;
     },
     showImage: function(n) {
-      var $el, _ref, _ref1;
+      var $el;
       if (n < 0) {
         return;
       }
@@ -117,13 +119,15 @@
       }
       this.currentImage = n;
       if (n === 12) {
-        if ((_ref = this.player) != null) {
-          _ref.api('play');
+        if (!this.iOS) {
+          this.player.api('play');
         }
-        if ((_ref1 = this.audio) != null) {
-          _ref1.pause();
+        if (!this.iOS) {
+          this.audio.pause();
         }
-        $('a.sound').addClass('off').text('sound on');
+        if (!this.iOS) {
+          $('a.sound').addClass('off').text('sound on');
+        }
       }
     },
     toCredits: function(e) {
@@ -136,13 +140,8 @@
       iframe = $('#vimeoplayer')[0];
       this.player = $f(iframe);
       this.player.addEvent('play', function() {
-        var _ref, _ref1;
-        if ((_ref = _this.player) != null) {
-          _ref.api('play');
-        }
-        if ((_ref1 = _this.audio) != null) {
-          _ref1.pause();
-        }
+        _this.player.api('play');
+        _this.audio.pause();
         $('a.sound').addClass('off').text('sound on');
       });
     },
@@ -153,16 +152,20 @@
       this.audio.play();
     },
     pauseAudio: function() {
-      var $el, _ref;
-      if ((_ref = this.audio) != null) {
-        _ref.pause();
+      var $el;
+      if (this.iOS) {
+        return;
       }
+      this.audio.pause();
       $el = $('a.sound');
       $el.text('sound off');
       $el.removeClass('off');
     },
     toggleSound: function(e) {
       var $el;
+      if (this.iOS) {
+        return;
+      }
       e.preventDefault();
       $el = $(e.target);
       if ($el.hasClass('off')) {

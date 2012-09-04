@@ -266,6 +266,10 @@ footer a {
   text-decoration: none;
   color: #AAA;
 }
+body.ios footer a.sound,
+body.ios footer .slash {
+  display: none;
+}
 .credits {
   font: 400 13px/22px 'Helvetica Neue', Sans-Serif;
 }
