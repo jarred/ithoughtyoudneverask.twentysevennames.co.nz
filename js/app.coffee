@@ -15,9 +15,10 @@ App =
     Mousetrap.bind 'k', @previousImage
     $('a.sound').bind 'click', @toggleSound
     $('a.to-credits').bind 'click', @toCredits
-    SC.initialize
-      client_id: "d47b942351e59deb9ec38d90a15beb81"
-    SC.whenStreamingReady @initAudio
+    # SC.initialize
+    #   client_id: "d47b942351e59deb9ec38d90a15beb81"
+    # SC.whenStreamingReady @initAudio
+    @initAudio()
     @initVideo()
     return
 
@@ -89,9 +90,14 @@ App =
 
   initAudio: ->
     console.log 'initAudio'
-    SC.stream "/tracks/54035078", (sound) =>
-      @audio = sound
-      @audio.play()
+    # [soundcloud url="http://api.soundcloud.com/tracks/58641256" params="secret_token=s-6XQkn" width="100%" height="166" iframe="true" /]
+    # SC.stream "/tracks/58641256", (sound) =>
+    #   @audio = sound
+    #   @audio.play()
+    @audio = new buzz.sound '/audio/27names2012final1', 
+      formats: ['mp3']
+    console.log @audio
+    @audio.play()
     return
 
   pauseAudio: ->

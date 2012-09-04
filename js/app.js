@@ -17,10 +17,7 @@
       Mousetrap.bind('k', this.previousImage);
       $('a.sound').bind('click', this.toggleSound);
       $('a.to-credits').bind('click', this.toCredits);
-      SC.initialize({
-        client_id: "d47b942351e59deb9ec38d90a15beb81"
-      });
-      SC.whenStreamingReady(this.initAudio);
+      this.initAudio();
       this.initVideo();
     },
     loadImage: function(el) {
@@ -100,12 +97,12 @@
       });
     },
     initAudio: function() {
-      var _this = this;
       console.log('initAudio');
-      SC.stream("/tracks/54035078", function(sound) {
-        _this.audio = sound;
-        return _this.audio.play();
+      this.audio = new buzz.sound('/audio/27names2012final1', {
+        formats: ['mp3']
       });
+      console.log(this.audio);
+      this.audio.play();
     },
     pauseAudio: function() {
       var $el;
