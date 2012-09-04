@@ -51,7 +51,6 @@
     },
     showImage: function(n) {
       var _ref, _ref1;
-      console.log('showImage', n);
       if (n < 0) {
         return;
       }
@@ -81,12 +80,8 @@
         _this = this;
       iframe = $('#vimeoplayer')[0];
       this.player = $f(iframe);
-      this.player.addEvent('ready', function() {
-        console.log('player ready');
-      });
       this.player.addEvent('play', function() {
         var _ref, _ref1;
-        console.log('player play');
         if ((_ref = _this.player) != null) {
           _ref.api('play');
         }
@@ -97,11 +92,9 @@
       });
     },
     initAudio: function() {
-      console.log('initAudio');
       this.audio = new buzz.sound('/audio/27names2012final1', {
-        formats: ['mp3']
+        formats: ['mp3', 'ogg', 'aac']
       });
-      console.log(this.audio);
       this.audio.play();
     },
     pauseAudio: function() {

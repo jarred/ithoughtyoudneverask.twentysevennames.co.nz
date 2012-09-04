@@ -55,7 +55,6 @@ App =
     return false
 
   showImage: (n) ->
-    console.log 'showImage', n
     return if n < 0
     return if n > 13
     $('body').animate
@@ -77,11 +76,9 @@ App =
   initVideo: ->
     iframe = $('#vimeoplayer')[0]
     @player = $f(iframe)
-    @player.addEvent 'ready', () =>
-      console.log 'player ready'
-      return
+    # @player.addEvent 'ready', () =>
+    #   return
     @player.addEvent 'play', () =>
-      console.log 'player play'
       @player?.api('play')
       @audio?.pause()
       $('a.sound').addClass('off').text('sound on')
@@ -89,14 +86,8 @@ App =
     return
 
   initAudio: ->
-    console.log 'initAudio'
-    # [soundcloud url="http://api.soundcloud.com/tracks/58641256" params="secret_token=s-6XQkn" width="100%" height="166" iframe="true" /]
-    # SC.stream "/tracks/58641256", (sound) =>
-    #   @audio = sound
-    #   @audio.play()
     @audio = new buzz.sound '/audio/27names2012final1', 
-      formats: ['mp3']
-    console.log @audio
+      formats: ['mp3', 'ogg', 'aac']
     @audio.play()
     return
 
